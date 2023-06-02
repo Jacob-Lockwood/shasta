@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "./lib",
+    "target": "ES2019",
+    "moduleResolution": "node"
+  },
+  "include": ["./src/**/*"]
+}

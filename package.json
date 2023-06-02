@@ -1,0 +1,44 @@
+{
+  "name": "shasta-lang",
+  "version": "0.0.0",
+  "description": "The Shasta programming language",
+  "main": "index.js",
+  "files": [
+    "/lib/*",
+    "/bin/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "test": "esrun ./scripts/tests.ts",
+    "postinstall": "chmod +x ./bin/shasta.js",
+    "dev": "pnpm run build:watch",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint src/**",
+    "prepare": "pnpm build",
+    "prepublishOnly": "pnpm lint",
+    "preversion": "pnpm lint",
+    "version": "pnpm format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "bin": {
+    "shasta": "bin/index.js"
+  },
+  "keywords": [],
+  "author": "@jacobofbrooklyn",
+  "license": "ISC",
+  "devDependencies": {
+    "@digitak/esrun": "^3.2.24",
+    "@types/node": "^20.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "eslint": "^8.41.0",
+    "prettier": "^2.8.8",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "chevrotain": "^10.5.0"
+  }
+}

@@ -1,0 +1,53 @@
+; Arithmetic
+add = + = {|a b| (eval "a + b")}
+subtract = - = {|a b| (eval "a - b")}
+multiply = * = {|a b| (eval "a * b")}
+divide = / = {|a b| (eval "a / b")}
+mod = % = {|a b| (eval "a % b")}
+pow = ** = {|a b| (eval "a ** b")}
+decrement = decr = -- = {(- $ 1)}
+increment = incr = ++ = {(+ $ 1)}
+
+; Comparisons
+is = {|a b| (eval "a === b")}
+not = ! = {(eval "!$")}
+and = {|a b| (eval "a && b")}
+or = {|a b| (eval "a || b")}
+greater_than = gt = > = {|2| (eval "$ > $2")}
+less_than = lt = < = {|2| (eval "$ < $2")}
+greater_than_equal = gte = >e = {|2| (eval "$ >= $2")}
+less_than_equal = lte = <e = {|2| (eval "$ <= $2")}
+
+apply = {|3| (eval "$.apply($1, $2)")}
+call = {|3| (eval "$.call($1, $2)")}
+type_of = {(eval "typeof $")}
+
+; Arrays
+reduce = {|2| (call Array.reduce)}
+reduce_right = {|2| (call Array.reduceRight)}
+is_array = {(Array.isArray)}
+in = {|2| (call Array.includes (to_array))}
+sort = {|2| ($.sort $1)}
+dict = {(Object.fromEntries)}
+entries = {(Object.entries)}
+; each = {|a b| (void (.b a))}
+sum = {(reduce $ +)}
+product = {(reduce $ *)}
+join = {|a b| (a.join b)}
+
+; Math
+absolute_value = abs = {(if (> $ 0) then $ else (- 0 $))}
+minimum = min = {(reduce $ {|a b| (if (> a b) then b else a)})}
+maximum = max = {(reduce $ {|a b| (if (< a b) then b else a)})}
+range = {|a b| (eval "[...Array(abs(b - a)).keys()].map(i => i + min([a, b]))")}
+sort = {|a b| (a.sort b)}
+
+; Other
+set = {|a b c| (eval "a[b] = c")}
+get = {|a b| (eval "a[b]")}
+print = {(console.log (join $ " "))}
+printf = {(eval "console.log(...$)")}
+
+; Strings
+split = {|a b| (a.split b)}
+replace = {|2| (call String.replace $2 $ $1)}

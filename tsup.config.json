@@ -1,0 +1,6 @@
+{
+  "entry": ["src/shasta.ts"],
+  "outDir": "lib",
+  "clean": true,
+  "format": "esm"
+}
