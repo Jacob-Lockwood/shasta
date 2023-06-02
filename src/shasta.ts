@@ -8,6 +8,8 @@ if (!argv[2]) {
   exit(1);
 }
 const filePath = resolve(cwd(), argv[2]);
-const file = readFile(filePath, "utf8");
-const compiled = file.then(compile);
+const file = readFile(filePath, "utf8").catch(() =>
+  console.error("Could not read file")
+);
+const compiled = file.then((str) => str && compile(str));
 compiled.then(console.log).catch(() => console.error("Could not compile"));

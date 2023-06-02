@@ -1,22 +1,39 @@
 ; Arithmetic
-add = + = {|a b| (eval "a + b")}
-subtract = - = {|a b| (eval "a - b")}
-multiply = * = {|a b| (eval "a * b")}
-divide = / = {|a b| (eval "a / b")}
-mod = % = {|a b| (eval "a % b")}
-pow = ** = {|a b| (eval "a ** b")}
-decrement = decr = -- = {(- $ 1)}
-increment = incr = ++ = {(+ $ 1)}
+add = {|a b| (eval "a + b")} + = add
+subtract = {|a b| (eval "a - b")} 
+- = subtract
+multiply = {|a b| (eval "a * b")} 
+* = multiply
+divide = {|a b| (eval "a / b")} 
+/ = divide
+mod = {|a b| (eval "a % b")}
+% = mod
+pow = {|a b| (eval "a ** b")}
+** = pow
+decrement = {(- $ 1)}
+decr = decrement
+-- = decrement
+increment = {(+ $ 1)}
+incr = increment
+++ = increment
 
 ; Comparisons
 is = {|a b| (eval "a === b")}
 not = ! = {(eval "!$")}
 and = {|a b| (eval "a && b")}
 or = {|a b| (eval "a || b")}
-greater_than = gt = > = {|2| (eval "$ > $2")}
-less_than = lt = < = {|2| (eval "$ < $2")}
-greater_than_equal = gte = >e = {|2| (eval "$ >= $2")}
-less_than_equal = lte = <e = {|2| (eval "$ <= $2")}
+greater_than = {|2| (eval "$ > $2")}
+gt = greater_than
+> = greater_than
+less_than = {|2| (eval "$ < $2")}
+lt = less_than
+< = less_than
+greater_than_or_equal = {|2| (eval "$ >= $2")}
+gte = greater_than_or_equal
+>e = greater_than_or_equal
+less_than_or_equal = {|2| (eval "$ <= $2")}
+lte = less_than_or_equal
+<e = less_than_or_equal
 
 apply = {|3| (eval "$.apply($1, $2)")}
 call = {|3| (eval "$.call($1, $2)")}
@@ -36,9 +53,12 @@ product = {(reduce $ *)}
 join = {|a b| (a.join b)}
 
 ; Math
-absolute_value = abs = {(if (> $ 0) then $ else (- 0 $))}
-minimum = min = {(reduce $ {|a b| (if (> a b) then b else a)})}
-maximum = max = {(reduce $ {|a b| (if (< a b) then b else a)})}
+absolute_value = {(if (> $ 0) then $ else (- 0 $))}
+abs = absolute_value
+minimum = {(reduce $ {|a b| (if (> a b) then b else a)})}
+min = minimum
+maximum = {(reduce $ {|a b| (if (< a b) then b else a)})}
+max = maximum
 range = {|a b| (eval "[...Array(abs(b - a)).keys()].map(i => i + min([a, b]))")}
 sort = {|a b| (a.sort b)}
 
