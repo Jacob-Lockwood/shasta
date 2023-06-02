@@ -105,8 +105,10 @@ function cstNodeToShastaNode(
     };
   }
   if ("array" in children) {
-    const arr = (children.array[0] as CstNode).children.expression as CstNode[];
-    return { type: "array", value: arr.map(down) };
+    const arr = (children.array[0] as CstNode).children.expression as
+      | CstNode[]
+      | undefined;
+    return { type: "array", value: (arr ?? []).map(down) };
   }
   if ("assignment" in children) {
     const assignment = (children.assignment[0] as CstNode).children;
@@ -180,7 +182,7 @@ function ShastaNodeToJS(node: ShastaNode): string {
     case "array":
       return `[${node.value.map(ShastaNodeToJS).join(", ")}]`;
     case "assignment":
-      return `${node.name} = ${ShastaNodeToJS(node.value)}`;
+      return `const ${node.name} = ${ShastaNodeToJS(node.value)}`;
     case "identifier":
       return node.name;
     case "fnApply":
@@ -191,7 +193,7 @@ function ShastaNodeToJS(node: ShastaNode): string {
       const [final, ...rest] = node.expressions.map(ShastaNodeToJS).reverse();
       return `(${node.args.join(", ")}) => {${rest.join(
         ";\n"
-      )}return (${final}))`;
+      )}return ${final}}`;
     }
     case "ifExpression":
       return `${ShastaNodeToJS(node.if)} ? ${ShastaNodeToJS(
