@@ -1,3 +1,5 @@
+; Test that Shasta can parse this file
+
 "abc"
 123
 0.9

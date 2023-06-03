@@ -2,7 +2,7 @@ import { parse } from "./parse.js";
 import type { CstNode, IToken } from "chevrotain";
 
 type ShastaNode =
-  | { type: "program"; expressions: ShastaNode[] }
+  | { type: "program"; statements: ShastaNode[] }
   | { type: "string"; value: string }
   | { type: "number"; value: number }
   | { type: "null"; value: null }
@@ -14,7 +14,7 @@ type ShastaNode =
   | {
       type: "fnDefinition";
       args: string[];
-      expressions: ShastaNode[];
+      statements: ShastaNode[];
       id: number;
     }
   | {
@@ -74,11 +74,26 @@ function cstNodeToShastaNode(
 ): ShastaNode {
   const down = (node: CstNode) => cstNodeToShastaNode(node, ctx);
   if (name === "program") {
-    if (!children.expression) return { type: "program", expressions: [] };
+    if (!children.statement) return { type: "program", statements: [] };
     return {
       type: "program",
-      expressions: (children.expression as CstNode[]).map(down),
+      statements: (children.statement as CstNode[]).map(down),
     };
+  }
+  if (name === "statement") {
+    if ("assignment" in children) {
+      const assignment = (children.assignment[0] as CstNode).children;
+      const ident = assignment.Identifier[0] as IToken;
+      const expression = assignment.expression[0] as CstNode;
+      return {
+        type: "assignment",
+        name: fixIdentifier(ident.image),
+        value: down(expression),
+      };
+    }
+    if ("expression" in children) {
+      return down(children.expression[0] as CstNode);
+    }
   }
   if ("StringLiteral" in children) {
     return {
@@ -105,18 +120,10 @@ function cstNodeToShastaNode(
     };
   }
   if ("array" in children) {
-    const arr = (children.array[0] as CstNode).children.expression as CstNode[];
-    return { type: "array", value: arr.map(down) };
-  }
-  if ("assignment" in children) {
-    const assignment = (children.assignment[0] as CstNode).children;
-    const ident = assignment.Identifier[0] as IToken;
-    const expression = assignment.expression[0] as CstNode;
-    return {
-      type: "assignment",
-      name: fixIdentifier(ident.image),
-      value: down(expression),
-    };
+    const arr = (children.array[0] as CstNode).children.expression as
+      | CstNode[]
+      | undefined;
+    return { type: "array", value: (arr ?? []).map(down) };
   }
   if ("propertyAccess" in children) {
     return {
@@ -150,10 +157,10 @@ function cstNodeToShastaNode(
           ].map((i) => `$${i || ""}`)
         : ["$"];
     const id = ctx.fns.length;
-    const expressions = (fnDefinition.expression as CstNode[]).map((node) =>
+    const statements = (fnDefinition.statement as CstNode[]).map((node) =>
       cstNodeToShastaNode(node, { ...ctx, args })
     );
-    return { type: "fnDefinition", args, expressions, id };
+    return { type: "fnDefinition", args, statements, id };
   }
   if ("ifExpression" in children) {
     const expressions = (children.ifExpression[0] as CstNode).children
@@ -166,7 +173,7 @@ function cstNodeToShastaNode(
 function ShastaNodeToJS(node: ShastaNode): string {
   switch (node.type) {
     case "program":
-      return node.expressions
+      return node.statements
         .map((expr) => ShastaNodeToJS(expr) + ";")
         .join("\n");
     case "string":
@@ -180,7 +187,7 @@ function ShastaNodeToJS(node: ShastaNode): string {
     case "array":
       return `[${node.value.map(ShastaNodeToJS).join(", ")}]`;
     case "assignment":
-      return `${node.name} = ${ShastaNodeToJS(node.value)}`;
+      return `const ${node.name} = ${ShastaNodeToJS(node.value)}`;
     case "identifier":
       return node.name;
     case "fnApply":
@@ -188,10 +195,10 @@ function ShastaNodeToJS(node: ShastaNode): string {
         .map(ShastaNodeToJS)
         .join(", ")})`;
     case "fnDefinition": {
-      const [final, ...rest] = node.expressions.map(ShastaNodeToJS).reverse();
+      const [final, ...rest] = node.statements.map(ShastaNodeToJS).reverse();
       return `(${node.args.join(", ")}) => {${rest.join(
         ";\n"
-      )}return (${final}))`;
+      )}return ${final}}`;
     }
     case "ifExpression":
       return `${ShastaNodeToJS(node.if)} ? ${ShastaNodeToJS(

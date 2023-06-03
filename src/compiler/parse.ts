@@ -56,13 +56,18 @@ export class ShastaParser extends CstParser {
     this.performSelfAnalysis();
   }
   public program = this.RULE("program", () => {
-    this.MANY({ DEF: () => this.SUBRULE(this.expression) });
+    this.MANY({ DEF: () => this.SUBRULE(this.statement) });
+  });
+  public statement = this.RULE("statement", () => {
+    this.OR([
+      { ALT: () => this.SUBRULE(this.assignment) },
+      { ALT: () => this.SUBRULE(this.expression) },
+    ]);
   });
   public expression = this.RULE("expression", () => {
     // this.OPTION({ DEF: () => this.CONSUME(tokens.FnModifier)})
     this.OR([
       { ALT: () => this.SUBRULE(this.fnApplication) },
-      { ALT: () => this.SUBRULE(this.assignment) },
       { ALT: () => this.SUBRULE(this.fnDefinition) },
       { ALT: () => this.SUBRULE(this.ifExpression) },
       { ALT: () => this.SUBRULE(this.propertyAccess) },
@@ -88,13 +93,13 @@ export class ShastaParser extends CstParser {
           {
             ALT: () => {
               this.CONSUME(tokens.Pipe);
-              this.AT_LEAST_ONE({ DEF: () => this.CONSUME(tokens.Identifier) }),
-                this.CONSUME2(tokens.Pipe);
+              this.AT_LEAST_ONE({ DEF: () => this.CONSUME(tokens.Identifier) });
+              this.CONSUME2(tokens.Pipe);
             },
           },
         ]),
     });
-    this.AT_LEAST_ONE2({ DEF: () => this.SUBRULE(this.expression) });
+    this.AT_LEAST_ONE2({ DEF: () => this.SUBRULE(this.statement) });
     this.CONSUME(tokens.RCurly);
   });
   public assignment = this.RULE("assignment", () => {
