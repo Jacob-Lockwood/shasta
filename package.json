@@ -1,6 +1,6 @@
 {
   "name": "shasta-lang",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The Shasta programming language",
   "main": "index.js",
   "files": [
