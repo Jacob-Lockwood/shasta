@@ -148,7 +148,9 @@ function cstNodeToShastaNode(
     const fnDefinition = (children.fnDefinition[0] as CstNode).children;
     const args =
       "Identifier" in fnDefinition
-        ? (fnDefinition.Identifier as IToken[]).map((ident) => ident.image)
+        ? (fnDefinition.Identifier as IToken[]).map((ident) =>
+            fixIdentifier(ident.image)
+          )
         : "Arity" in fnDefinition
         ? [
             ...Array(
