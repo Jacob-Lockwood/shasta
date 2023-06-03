@@ -12,4 +12,4 @@ const file = readFile(filePath, "utf8").catch(() =>
   console.error("Could not read file")
 );
 const compiled = file.then((str) => str && compile(str));
-compiled.then(console.log).catch(() => console.error("Could not compile"));
+compiled.then(console.log).catch(() => console.error("Panic: Kablooey!"));
