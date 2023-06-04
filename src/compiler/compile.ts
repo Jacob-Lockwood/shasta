@@ -8,7 +8,6 @@ type ShastaNode =
   | { type: "number"; value: number }
   | { type: "null"; value: null }
   | { type: "boolean"; value: boolean }
-  | { type: "regex"; value: string }
   | { type: "array"; value: ShastaNode[] }
   | { type: "assignment"; name: string; value: ShastaNode }
   | { type: "identifier"; name: string }
@@ -92,12 +91,6 @@ function cstNodeToShastaNode(
       value: +(children.NumberLiteral[0] as IToken).image.replace("_", "-"),
     };
   }
-  if ("Regex" in children) {
-    return {
-      type: "regex",
-      value: (children.Regex[0] as IToken).image,
-    };
-  }
   if ("BooleanLiteral" in children) {
     return {
       type: "boolean",
@@ -177,8 +170,6 @@ function ShastaNodeToJS(node: ShastaNode): string {
       return node.value + "";
     case "null":
       return node.value + "";
-    case "regex":
-      return node.value;
     case "array":
       return `[${node.value.map(ShastaNodeToJS).join(", ")}]`;
     case "assignment":

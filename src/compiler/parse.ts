@@ -2,7 +2,7 @@ import { createToken, Lexer, CstParser } from "chevrotain";
 
 const Identifier = createToken({
   name: "Identifier",
-  pattern: /\$(?:[1-9]\d*)?|[a-zA-Z*+!_%\-/<>]+/,
+  pattern: /\$(?:[1-9]\d*)?|[a-zA-Z*+!_%\-\/<>]+/,
 });
 
 const tokens = {
@@ -31,11 +31,6 @@ const tokens = {
   NumberLiteral: createToken({
     name: "NumberLiteral",
     pattern: /_?(?:0|[1-9]\d*)(?:\.\d+)?/,
-  }),
-  Regex: createToken({
-    name: "Regex",
-    pattern:
-      /\/((?![*+?])(?:[^\r\n\[/\\]|\\.|\[(?:[^\r\n\]\\]|\\.)*\])+)\/((?:g(?:im?|mi?)?|i(?:gm?|mg?)?|m(?:gi?|ig?)?)?)/,
   }),
   BooleanLiteral: createToken({
     name: "BooleanLiteral",
@@ -81,7 +76,6 @@ export class ShastaParser extends CstParser {
       { ALT: () => this.CONSUME(tokens.StringLiteral) },
       { ALT: () => this.CONSUME(tokens.BooleanLiteral) },
       { ALT: () => this.CONSUME(tokens.Null) },
-      { ALT: () => this.CONSUME(tokens.Regex) },
     ]);
   });
   public fnApplication = this.RULE("fnApply", () => {
