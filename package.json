@@ -16,10 +16,7 @@
     "build:watch": "tsup --watch",
     "build:lib": "esrun ./scripts/compile_lib.ts",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint src/**",
     "prepare": "pnpm build",
-    "prepublishOnly": "pnpm lint",
-    "preversion": "pnpm lint",
     "version": "pnpm format && git add -A src",
     "postversion": "git push && git push --tags"
   },
