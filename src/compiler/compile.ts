@@ -1,4 +1,5 @@
 import { parse } from "./parse.js";
+import { fixIdentifier } from "./fix_identifier.js";
 import type { CstNode, IToken } from "chevrotain";
 
 type ShastaNode =
@@ -24,23 +25,6 @@ type ShastaNode =
       else: ShastaNode;
     }
   | Record<string, never>;
-
-function fixIdentifier(name: string): string {
-  const invalidIdentifiers = {
-    "*": "$star",
-    "+": "$plus",
-    "!": "$bang",
-    "-": "$dash",
-    "%": "$percent",
-    "/": "$slash",
-    "<": "$lt",
-    ">": "$gt",
-  };
-  return name.replace(
-    /[*+!%-/<>]/g,
-    (char) => invalidIdentifiers[char as keyof typeof invalidIdentifiers]
-  );
-}
 
 function ifExpressionToShastaNode(expressions: CstNode[]): ShastaNode {
   if (expressions.length === 1) return cstNodeToShastaNode(expressions[0]);
