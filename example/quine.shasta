@@ -1,0 +1,1 @@
+q='"'a="q='%s'a=%s(printf a[q,(wrap a q)])"(printf a[q,(wrap a q)])
