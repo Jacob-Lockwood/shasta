@@ -13,7 +13,7 @@ npm install shasta-lang -g
 You can run the compiler using the CLI:
 
 ```bash
-shasta < <filename.shasta> > output.js
+shasta-lang < <filename.shasta> > output.js
 ```
 
 Alternatively, you can try Shasta online...Once I get around to building a website for it. (Somewhat high on the priority list)
