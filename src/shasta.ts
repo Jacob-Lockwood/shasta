@@ -1,15 +1,16 @@
-import { resolve } from "path";
-import { argv, cwd, exit } from "process";
-import { readFile } from "fs/promises";
+import { stdin } from "node:process";
+import { readFileSync } from "node:fs";
 import { compile } from "./compiler/compile";
 
-if (!argv[2]) {
-  console.error("❌ No file provided");
-  exit(1);
-}
-const filePath = resolve(cwd(), argv[2]);
-const file = readFile(filePath, "utf8").catch(() =>
-  console.error("Could not read file")
+const file = readFileSync(stdin.fd, "utf8");
+const lib = readFileSync(
+  new URL("../src/lib/standard.shasta", import.meta.url),
+  "utf8"
 );
-const compiled = file.then((str) => str && compile(str));
-compiled.then(console.log).catch(() => console.error("Panic: Kablooey!"));
+
+try {
+  const compiled = compile(lib + file);
+  console.log(compiled);
+} catch (e) {
+  console.error("Panic: Kablooey!", e);
+}
