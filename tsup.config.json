@@ -1,6 +1,7 @@
 {
   "entry": ["src/shasta.ts"],
-  "outDir": "lib",
+  "outDir": "dist",
   "clean": true,
-  "format": "esm"
+  "format": "esm",
+  "target": "es2020"
 }

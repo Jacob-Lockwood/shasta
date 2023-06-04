@@ -4,7 +4,7 @@
   "description": "The Shasta programming language",
   "main": "index.js",
   "files": [
-    "/lib/*",
+    "/dist/*",
     "/bin/*"
   ],
   "type": "module",
@@ -12,8 +12,9 @@
     "test": "esrun ./scripts/tests.ts",
     "postinstall": "chmod +x ./bin/shasta.js",
     "dev": "pnpm run build:watch",
-    "build": "tsup",
+    "build": "tsup && pnpm build:lib",
     "build:watch": "tsup --watch",
+    "build:lib": "esrun ./scripts/compile_lib.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint src/**",
     "prepare": "pnpm build",

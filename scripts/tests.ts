@@ -1,7 +1,7 @@
-import { readdir, readFile } from "fs/promises";
-import { resolve } from "path";
+import { readdir, readFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { exit } from "node:process";
 import { compile } from "../src/compiler/compile";
-import { exit } from "process";
 
 const testDir = resolve(__dirname, "../test");
 

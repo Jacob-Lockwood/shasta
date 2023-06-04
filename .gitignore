@@ -4,4 +4,4 @@ node_modules
 .vscode
 
 # output directory
-/lib
+/dist

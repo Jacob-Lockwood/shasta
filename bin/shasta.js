@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-import "../lib/shasta.js";
+import "../dist/shasta.js";
