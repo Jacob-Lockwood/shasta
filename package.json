@@ -1,6 +1,6 @@
 {
   "name": "shasta-lang",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The Shasta programming language",
   "main": "index.js",
   "files": [
@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "test": "esrun ./scripts/tests.ts",
-    "postinstall": "chmod +x ./bin/shasta.js",
+    "postinstall": "chmod +x ./bin/index.js",
     "dev": "pnpm run build:watch",
     "build": "tsup && pnpm build:lib",
     "build:watch": "tsup --watch",
@@ -20,9 +20,7 @@
     "version": "pnpm format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "bin": {
-    "shasta": "bin/index.js"
-  },
+  "bin": "./bin/index.js",
   "keywords": [],
   "author": "@jacobofbrooklyn",
   "license": "ISC",
