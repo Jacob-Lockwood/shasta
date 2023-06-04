@@ -23,16 +23,16 @@ not = {(eval "!$")}
 ! = not
 and = {|a b| (eval "a && b")}
 or = {|a b| (eval "a || b")}
-greater_than = {|2| (eval "$ > $2")}
+greater_than = {|2| (eval "$ > $1")}
 gt = greater_than
 > = greater_than
-less_than = {|2| (eval "$ < $2")}
+less_than = {|2| (eval "$ < $1")}
 lt = less_than
 < = less_than
-greater_than_or_equal = {|2| (eval "$ >= $2")}
+greater_than_or_equal = {|2| (eval "$ >= $1")}
 gte = greater_than_or_equal
 >e = greater_than_or_equal
-less_than_or_equal = {|2| (eval "$ <= $2")}
+less_than_or_equal = {|2| (eval "$ <= $1")}
 lte = less_than_or_equal
 <e = less_than_or_equal
 
@@ -41,8 +41,8 @@ call = {|3| (eval "$.call($1, $2)")}
 type_of = {(eval "typeof $")}
 
 ; Arrays
-reduce = {|2| (call Array.prototype.reduce)}
-reduce_right = {|2| (call Array.prototype.reduceRight)}
+reduce = {|2| (call Array.prototype.reduce $ $1)}
+reduce_right = {|2| (call Array.prototype.reduceRight $ $1)}
 is_array = {(Array.isArray)}
 in = {|2| (call Array.prototype.includes (to_array))}
 dict = {(Object.fromEntries)}
@@ -50,8 +50,8 @@ entries = {(Object.entries)}
 ; each = {|a b| (void (.b a))}
 join = {|a b| (a.join b)}
 sort = {|2| ($.sort $1)}
-all = {($.every {(is $ true)})}
-some = {($.some {(is $ true)})}
+all = {($.every {$})}
+some = {($.some {$})}
 filter = {|2| ($.filter $1)}
 map = {|2| ($.map $1)}
 push = {|2| ($.push $1)}
