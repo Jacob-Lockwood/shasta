@@ -41,17 +41,28 @@ call = {|3| (eval "$.call($1, $2)")}
 type_of = {(eval "typeof $")}
 
 ; Arrays
-reduce = {|2| (call Array.reduce)}
-reduce_right = {|2| (call Array.reduceRight)}
+reduce = {|2| (call Array.prototype.reduce)}
+reduce_right = {|2| (call Array.prototype.reduceRight)}
 is_array = {(Array.isArray)}
-in = {|2| (call Array.includes (to_array))}
-sort = {|2| ($.sort $1)}
+in = {|2| (call Array.prototype.includes (to_array))}
 dict = {(Object.fromEntries)}
 entries = {(Object.entries)}
 ; each = {|a b| (void (.b a))}
-sum = {(reduce $ +)}
-product = {(reduce $ *)}
 join = {|a b| (a.join b)}
+sort = {|2| ($.sort $1)}
+all = {($.every {(is $ true)})}
+some = {($.some {(is $ true)})}
+filter = {|2| ($.filter $1)}
+map = {|2| ($.map $1)}
+push = {|2| ($.push $1)}
+push = {($.pop)}
+length = {$.length}
+count = {|2| (length (filter $ {|x| (is x $)}))}
+slice = {|3| ($.slice $1 $2)}
+copy = {(slice $ 0 (length $))}
+reverse = {(apply Array.prototype.reverse (copy $) [])}
+index_of = {|2| ($.indexOf $1)}
+remove = {|2| (call Array.prototype.toSpliced $ $1 1)}
 
 ; Math
 absolute_value = {(if (> $ 0) then $ else (- 0 $))}
@@ -61,6 +72,8 @@ min = minimum
 maximum = {(reduce $ {|a b| (if (< a b) then b else a)})}
 max = maximum
 range = {|a b| (eval "[...Array(abs(b - a)).keys()].map(i => i + min([a, b]))")}
+sum = {(reduce $ +)}
+product = {(reduce $ *)}
 
 ; Other
 set = {|a b c| (eval "a[b] = c")}
