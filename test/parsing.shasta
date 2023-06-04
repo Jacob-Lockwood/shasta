@@ -8,6 +8,7 @@
 _100.2
 true
 false
+/this (is)? (?:a) [regex]/gi
 [1]
 [1, 2, 3]
 ["abc", 123, 0.9, _100.2]

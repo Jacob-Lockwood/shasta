@@ -32,6 +32,11 @@ const tokens = {
     name: "NumberLiteral",
     pattern: /_?(?:0|[1-9]\d*)(?:\.\d+)?/,
   }),
+  Regex: createToken({
+    name: "Regex",
+    pattern:
+      /\/((?![*+?])(?:[^\r\n\[/\\]|\\.|\[(?:[^\r\n\]\\]|\\.)*\])+)\/((?:g(?:im?|mi?)?|i(?:gm?|mg?)?|m(?:gi?|ig?)?)?)/,
+  }),
   BooleanLiteral: createToken({
     name: "BooleanLiteral",
     pattern: /true|false/,
@@ -76,6 +81,7 @@ export class ShastaParser extends CstParser {
       { ALT: () => this.CONSUME(tokens.StringLiteral) },
       { ALT: () => this.CONSUME(tokens.BooleanLiteral) },
       { ALT: () => this.CONSUME(tokens.Null) },
+      { ALT: () => this.CONSUME(tokens.Regex) },
     ]);
   });
   public fnApplication = this.RULE("fnApply", () => {
