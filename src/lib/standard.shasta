@@ -84,3 +84,4 @@ printf = {|2| (eval "console.log($, ...$1)")}
 ; Strings
 split = {|a b| (a.split b)}
 replace = {|2| (call String.replace $2 $ $1)}
+wrap = {|2| (join [$1, $, $1] "")}
