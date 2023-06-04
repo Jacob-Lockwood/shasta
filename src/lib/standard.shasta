@@ -19,7 +19,8 @@ incr = increment
 
 ; Comparisons
 is = {|a b| (eval "a === b")}
-not = ! = {(eval "!$")}
+not = {(eval "!$")}
+! = not
 and = {|a b| (eval "a && b")}
 or = {|a b| (eval "a || b")}
 greater_than = {|2| (eval "$ > $2")}
@@ -60,13 +61,12 @@ min = minimum
 maximum = {(reduce $ {|a b| (if (< a b) then b else a)})}
 max = maximum
 range = {|a b| (eval "[...Array(abs(b - a)).keys()].map(i => i + min([a, b]))")}
-sort = {|a b| (a.sort b)}
 
 ; Other
 set = {|a b c| (eval "a[b] = c")}
 get = {|a b| (eval "a[b]")}
 print = {(console.log (join $ " "))}
-printf = {(eval "console.log(...$)")}
+printf = {|2| (eval "console.log($, ...$1)")}
 
 ; Strings
 split = {|a b| (a.split b)}
