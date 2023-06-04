@@ -1,6 +1,8 @@
 ; Test that Shasta can parse this file
 
 "abc"
+"this string contains 'single' and \"double\" quotes"
+'this string contains "double" and \'single\' quotes'
 123
 0.9
 _100.2

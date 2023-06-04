@@ -26,7 +26,7 @@ const tokens = {
   Pipe: createToken({ name: "Pipe", pattern: /\|/ }),
   StringLiteral: createToken({
     name: "StringLiteral",
-    pattern: /"(?:[^\\"]|\\.)*"/,
+    pattern: /"(?:[^\\"]|\\.)*"|'(?:[^\\']|\\.)*'/,
   }),
   NumberLiteral: createToken({
     name: "NumberLiteral",
