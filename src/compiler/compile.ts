@@ -184,7 +184,7 @@ function ShastaNodeToJS(node: ShastaNode): string {
       const [final, ...rest] = node.statements.map(ShastaNodeToJS).reverse();
       return `(${node.args.join(", ")}) => {${rest.join(
         ";\n"
-      )}return ${final}}`;
+      )};return ${final}}`;
     }
     case "ifExpression":
       return `${ShastaNodeToJS(node.if)} ? ${ShastaNodeToJS(

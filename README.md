@@ -4,18 +4,16 @@ Shasta is a programming language that transpiles to JavaScript. Its syntax is la
 
 ## Get Started
 
-I will release an NPM package once I have implemented a few more key features, but for now you can clone the repository, and run `pnpm link -g` to get the `shasta` command.
-
-<!-- You can install Shasta off of NPM:
+You can install Shasta off of NPM:
 
 ```bash
 npm install shasta-lang -g
-``` -->
+```
 
 You can run the compiler using the CLI:
 
 ```bash
-shasta <filename.shasta> > output.js
+shasta < <filename.shasta> > output.js
 ```
 
 Alternatively, you can try Shasta online...Once I get around to building a website for it. (Somewhat high on the priority list)
