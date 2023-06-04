@@ -1,0 +1,27 @@
+mean = {(/ (sum $) (length $))}
+
+population_deviation = {|x|
+  (Math.sqrt
+    (/
+      (sum 
+        (map x {(pow (- $ (mean x)) 2)})
+      )
+      (length x)
+    )
+  )
+}
+sample_deviation = {|x|
+  (Math.sqrt
+    (/
+      (sum 
+        (map x {(pow (- $ (mean x)) 2)})
+      )
+      (length x)
+    )
+  )
+}
+
+
+corellation_coefficient = {|2|
+
+}
