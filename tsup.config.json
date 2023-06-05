@@ -1,5 +1,5 @@
 {
-  "entry": ["src/shasta.ts"],
+  "entry": ["src/shasta.ts", "src/index.ts"],
   "outDir": "dist",
   "clean": true,
   "format": "esm",

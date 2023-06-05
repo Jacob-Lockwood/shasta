@@ -52,7 +52,7 @@ interface Ctx {
   fns: (ShastaNode & { type: "fnDefinition" })[];
 }
 
-function cstNodeToShastaNode(
+export function cstNodeToShastaNode(
   { children, name }: CstNode,
   ctx: Ctx = { fns: [] }
 ): ShastaNode {
@@ -156,7 +156,7 @@ function cstNodeToShastaNode(
   return {};
 }
 
-function ShastaNodeToJS(node: ShastaNode): string {
+export function ShastaNodeToJS(node: ShastaNode): string {
   switch (node.type) {
     case "program":
       return node.statements

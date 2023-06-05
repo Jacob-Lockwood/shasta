@@ -2,7 +2,7 @@
   "name": "shasta-lang",
   "version": "0.0.11",
   "description": "The Shasta programming language",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
     "/dist/*",
     "/bin/*"
