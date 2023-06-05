@@ -182,9 +182,9 @@ function ShastaNodeToJS(node: ShastaNode): string {
         .join(", ")})`;
     case "fnDefinition": {
       const [final, ...rest] = node.statements.map(ShastaNodeToJS).reverse();
-      return `(${node.args.join(", ")}) => {${rest.join(
+      return `((${node.args.join(", ")}) => {${rest.join(
         ";\n"
-      )};return ${final}}`;
+      )};return ${final}})`;
     }
     case "ifExpression":
       return `${ShastaNodeToJS(node.if)} ? ${ShastaNodeToJS(
