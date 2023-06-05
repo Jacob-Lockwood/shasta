@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="The Shasta Programming Language">
+	<section class="max-w-xl mx-auto pt-20 flex flex-col gap-1 text-lg">
+		<h1 class="text-4xl font-mono font-bold">Shasta</h1>
+		<p class="text-purple-600 dark:text-purple-300">
+			A simple yet powerful programming language for the web
+		</p>
+		<a
+			href="./docs"
+			class="font-mono text-violet-500 dark:text-violet-300 group"
+		>
+			<!--  -->
+			<span class="underline underline-offset-2">
+				(<span class="text-fuchsia-500 font-bold">hyperlink</span>
+				"<span class="text-green-600 dark:text-green-200"
+					>Get started with the docs!</span
+				>")</span
+			>
+			<span class="inline-block transition-transform group-hover:translate-x-2">
+				&rarr;
+			</span>
+		</a>
+		<a
+			href="./tryit"
+			class="font-mono text-violet-500 dark:text-violet-300 group"
+		>
+			<span class="underline underline-offset-2">
+				(<span class="text-fuchsia-500 font-bold">hyperlink</span>
+				"<span class="text-green-600 dark:text-green-200"
+					>Try it online at the Playground!</span
+				>")</span
+			>
+			<span class="inline-block transition-transform group-hover:translate-x-2">
+				&rarr;
+			</span>
+		</a>
+	</section>
+	<main class="max-w-2xl mx-auto py-10 flex flex-col gap-5">
+		<p>
+			Shasta is a programming language designed for usage on the web; it
+			transpiles to JavaScript, meaning it can run either in a browser or on a
+			server, and can easily interop with most JavaScript libraries. Its syntax
+			is inspired by Lisp and its standard library is inspired by Python, but
+			many of its semantics are closer to those of JavaScript as that is the
+			language it transpiles to.
+		</p>
+		<p>
+			The language is still in very early development, but I encourage you to
+			try it out and let me know of any suggestions, issues, or bugs you find.
+			I'm working on the documentation that's available on this site, but it's
+			still a work-in-progress.
+		</p>
+	</main>
+</Layout>
