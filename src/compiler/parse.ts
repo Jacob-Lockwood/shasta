@@ -48,7 +48,7 @@ const tokens = {
     group: "comments",
   }),
 };
-const lexer = new Lexer(Object.values(tokens));
+export const lexer = new Lexer(Object.values(tokens));
 
 export class ShastaParser extends CstParser {
   constructor() {
