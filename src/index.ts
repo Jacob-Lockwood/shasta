@@ -2,5 +2,5 @@ export { parse } from "./compiler/parse";
 export {
   compile,
   cstNodeToShastaNode,
-  ShastaNodeToJS,
+  shastaNodeToJS as ShastaNodeToJS,
 } from "./compiler/compile";

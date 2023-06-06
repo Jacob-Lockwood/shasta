@@ -156,11 +156,11 @@ export function cstNodeToShastaNode(
   return {};
 }
 
-export function ShastaNodeToJS(node: ShastaNode): string {
+export function shastaNodeToJS(node: ShastaNode): string {
   switch (node.type) {
     case "program":
       return node.statements
-        .map((expr) => ShastaNodeToJS(expr) + ";")
+        .map((expr) => shastaNodeToJS(expr) + ";")
         .join("\n");
     case "string":
       return node.value;
@@ -171,25 +171,25 @@ export function ShastaNodeToJS(node: ShastaNode): string {
     case "null":
       return node.value + "";
     case "array":
-      return `[${node.value.map(ShastaNodeToJS).join(", ")}]`;
+      return `[${node.value.map(shastaNodeToJS).join(", ")}]`;
     case "assignment":
-      return `const ${node.name} = ${ShastaNodeToJS(node.value)}`;
+      return `const ${node.name} = ${shastaNodeToJS(node.value)}`;
     case "identifier":
       return node.name;
     case "fnApply":
-      return `${ShastaNodeToJS(node.fn)}(${node.args
-        .map(ShastaNodeToJS)
+      return `${shastaNodeToJS(node.fn)}(${node.args
+        .map(shastaNodeToJS)
         .join(", ")})`;
     case "fnDefinition": {
-      const [final, ...rest] = node.statements.map(ShastaNodeToJS).reverse();
+      const [final, ...rest] = node.statements.map(shastaNodeToJS).reverse();
       return `((${node.args.join(", ")}) => {${rest.join(
         ";\n"
       )};return ${final}})`;
     }
     case "ifExpression":
-      return `${ShastaNodeToJS(node.if)} ? ${ShastaNodeToJS(
+      return `${shastaNodeToJS(node.if)} ? ${shastaNodeToJS(
         node.then
-      )} : ${ShastaNodeToJS(node.else)}`;
+      )} : ${shastaNodeToJS(node.else)}`;
     default:
       return "";
   }
@@ -200,6 +200,6 @@ export function compile(source: string) {
   if (!cst && parseErrors.length)
     throw new Error(JSON.stringify(parseErrors, null, 2));
   const intermediate = cstNodeToShastaNode(cst);
-  const js = ShastaNodeToJS(intermediate);
+  const js = shastaNodeToJS(intermediate);
   return js;
 }
