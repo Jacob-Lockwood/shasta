@@ -1,4 +1,4 @@
-export { parse } from "./compiler/parse";
+export { parse, lexer } from "./compiler/parse";
 export {
   compile,
   cstNodeToShastaNode,
