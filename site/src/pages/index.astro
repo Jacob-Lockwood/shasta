@@ -1,4 +1,5 @@
 ---
+import Code from "../components/Code.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -12,13 +13,10 @@ import Layout from "../layouts/Layout.astro";
 			href="./docs"
 			class="font-mono text-violet-500 dark:text-violet-300 group"
 		>
-			<!--  -->
-			<span class="underline underline-offset-2">
-				(<span class="text-fuchsia-500 font-bold">hyperlink</span>
-				"<span class="text-green-600 dark:text-green-200"
-					>Get started with the docs!</span
-				>")</span
-			>
+			<Code
+				class="underline underline-offset-2"
+				source={`(hyperlink "Get started with the docs!")`}
+			/>
 			<span class="inline-block transition-transform group-hover:translate-x-2">
 				&rarr;
 			</span>
@@ -27,12 +25,22 @@ import Layout from "../layouts/Layout.astro";
 			href="./tryit"
 			class="font-mono text-violet-500 dark:text-violet-300 group"
 		>
-			<span class="underline underline-offset-2">
-				(<span class="text-fuchsia-500 font-bold">hyperlink</span>
-				"<span class="text-green-600 dark:text-green-200"
-					>Try it online at the Playground!</span
-				>")</span
-			>
+			<Code
+				class="underline underline-offset-2"
+				source={`(hyperlink "Try it online at the playground!")`}
+			/>
+			<span class="inline-block transition-transform group-hover:translate-x-2">
+				&rarr;
+			</span>
+		</a>
+		<a
+			href="./examples"
+			class="font-mono text-violet-500 dark:text-violet-300 group"
+		>
+			<Code
+				class="underline underline-offset-2"
+				source={`(hyperlink "Check out some examples!")`}
+			/>
 			<span class="inline-block transition-transform group-hover:translate-x-2">
 				&rarr;
 			</span>
