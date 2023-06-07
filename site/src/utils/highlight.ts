@@ -11,14 +11,24 @@ const theme = {
   BooleanLiteral: "text-orange-600 italic",
   Null: "text-purple-600",
   Comment: "text-gray-600 dark:text-gray-400 italic",
+  other: "text-gray-400",
 };
 
 export function highlight(source: string) {
-  const { tokens } = lexer.tokenize(source);
+  const {
+    tokens,
+    groups: { comments },
+  } = lexer.tokenize(source);
+  tokens.push(...comments);
+  const allTokens: typeof tokens = [];
+  for (let i = 0; i < source.length; i++) {
+    const token = tokens.find((t) => t.startOffset === i);
+    if (token) allTokens.push(token);
+  }
   let result = "";
   let amountAdded = 0;
   let previousTokenType: string = "";
-  for (const token of tokens) {
+  for (const token of allTokens) {
     const { startOffset, endOffset, tokenType, image } = token;
     if (amountAdded < startOffset) {
       result += `<span>${source.slice(amountAdded + 1, startOffset)}</span>`;
@@ -29,10 +39,8 @@ export function highlight(source: string) {
           ? "Function"
           : tokenType.name
         : tokenType.name;
-    const className = theme[tokType as keyof typeof theme];
-    result += `<span ${
-      className ? `class="${className}"` : ""
-    }>${image}</span>`;
+    const className = theme[tokType as keyof typeof theme] ?? theme.other;
+    result += `<span class="${className}">${image}</span>`;
     amountAdded = endOffset!;
     previousTokenType = tokenType.name;
   }
