@@ -1,0 +1,53 @@
+---
+title: Primitive Types
+index: 1
+---
+
+import CodeBlock from "../../components/CodeBlock.astro";
+
+# Primitive data types in Shasta
+
+Shasta supports the following primitive data types:
+
+## Numbers
+
+<CodeBlock language="shasta">
+
+1
+2.5
+30000
+0.998
+\_1.2 ; Negative numbers are prefixed with an underscore
+
+</CodeBlock>
+
+## Strings
+
+<CodeBlock language="shasta">
+  {`
+"Hello, World!"
+'Strings can use "single quotes"'
+"Strings can use 'double quotes'"
+"Strings can have \\"escaped characters\\""
+`}
+</CodeBlock>
+
+## Booleans
+
+<CodeBlock language="shasta">
+  {`
+true
+false
+`}
+</CodeBlock>
+
+## Arrays
+
+<CodeBlock language="shasta">
+  {`
+[1, 2, 3]
+["Hello", "world!"]
+["a", 1, "b", 2]
+[1, 2, 3, ] ; trailing commas are supported
+`}
+</CodeBlock>

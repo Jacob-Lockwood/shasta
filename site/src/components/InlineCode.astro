@@ -1,0 +1,21 @@
+---
+import { highlight } from "../utils/highlight";
+
+type Props = { language: string; class: string } | { className: string };
+
+const language =
+  "language" in Astro.props
+    ? Astro.props.language
+    : Astro.props.className.match(/language-(\w+)/)?.[1];
+
+const shouldHighlight =
+  "language" in Astro.props
+    ? Astro.props.language === "shasta"
+    : Astro.props.className.includes("language-shasta");
+const rawCode = await Astro.slots.render("default");
+const code = shouldHighlight ? highlight(rawCode) : rawCode;
+const className =
+  "class" in Astro.props ? Astro.props.class : Astro.props.className;
+---
+
+<code class={className} set:html={code} />

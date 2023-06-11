@@ -1,0 +1,28 @@
+---
+title: Getting Started + Installation
+index: 0
+---
+
+import CodeBlock from "../../components/CodeBlock.astro";
+import InlineCode from "../../components/InlineCode.astro";
+import Info from "../../components/Info.astro";
+
+# Getting started with Shasta
+
+Welcome to the Shasta programming language!
+
+While you're getting started, I recommend trying out the [Shasta Playground](../playground) to try Shasta out online. It's built to let you experiment with the language with an interface that lets you explore its features.
+
+You can install Shasta off of NPM, and run the compiler using the CLI:
+
+<CodeBlock language="sh">
+
+npm install shasta-lang -g
+shasta-lang < filename.shasta > output.js
+
+</CodeBlock>
+
+<Info type="warn">
+  The Shasta language is still in very early development; don't try to use it in
+  any kind of production environment yet.
+</Info>

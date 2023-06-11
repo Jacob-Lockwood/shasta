@@ -1,0 +1,22 @@
+---
+interface Props {
+  type: "info" | "warn" | "tip";
+}
+const { type } = Astro.props;
+
+const style = {
+  info: "bg-fuchsia-200 text-fuchsia-800 dark:bg-indigo-500 dark:text-white",
+  warn: "bg-amber-400 text-amber-900 dark:bg-amber-700 dark:text-white",
+  tip: "bg-blue-200 text-blue-800 dark:bg-blue-500 dark:text-white",
+};
+const icon = {
+  info: "💡",
+  warn: "⚠️",
+  tip: "🔑",
+};
+---
+
+<aside class={`flex items-center shadow gap-5 p-3 rounded ${style[type]}`}>
+  <span class="text-2xl">{icon[type]}</span>
+  <slot />
+</aside>

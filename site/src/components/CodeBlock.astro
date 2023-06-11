@@ -1,0 +1,21 @@
+---
+import { highlight } from "../utils/highlight";
+import { unescapeEntities } from "../utils/unescape";
+
+interface Props {
+  language: string;
+}
+
+const { language } = Astro.props;
+const shouldHighlight = language === "shasta";
+const rawHTML = await Astro.slots.render("default");
+const rawCode = unescapeEntities(rawHTML);
+const code = shouldHighlight ? highlight(rawCode) : rawCode;
+---
+
+<div
+  class="bg-white dark:bg-slate-900 bg-opacity-75 px-3 py-5 rounded-lg shadow dark:shadow-none"
+>
+  <p class="font-mono mb-3 text-sm opacity-75">{language}</p>
+  <pre class="whitespace-pre-wrap"><code set:html={code} /></pre>
+</div>

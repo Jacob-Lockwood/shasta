@@ -17,8 +17,20 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body
-		class="bg-fuchsia-100 dark:bg-indigo-950 text-fuchsia-950 dark:text-fuchsia-200"
+		class="bg-fuchsia-100 dark:bg-indigo-950 text-fuchsia-950 dark:text-fuchsia-200 px-5"
 	>
+		<header class="py-10 text-lg font-mono">
+			<nav class="flex gap-5 sm:gap-20 justify-center">
+				<a href="/">Shasta Homepage 🐿</a>
+				<a href="/tutorial/">Tutorial</a>
+				<a href="/docs/">Docs</a>
+				<a href="/playground">Playground</a>
+			</nav>
+		</header>
 		<slot />
+		<footer class="py-12 text-sm text-center font-mono">
+			<p>&copy; 2023 Jacob Lockwood</p>
+			<p class="opacity-50">Site made with {Astro.generator}</p>
+		</footer>
 	</body>
 </html>
