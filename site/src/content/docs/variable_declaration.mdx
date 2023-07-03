@@ -1,0 +1,22 @@
+---
+title: Variable Declaration
+---
+
+import CodeBlock from "../../components/CodeBlock.astro";
+import InlineCode from "../../components/InlineCode.astro";
+
+A variable is declared with an [identifier], an equal sign `=`, and an [expression]. For example:
+
+<CodeBlock language="shasta">
+  {`
+my_variable = 1
+abc = "abc"
+my_function = {|2| (+ $ $1)}
+result = (my_function my_variable abc)
+`}
+</CodeBlock>
+
+In Shasta, all variables are constants, meaning they cannot be re-assigned.
+
+[identifier]: ./identifier
+[expression]: ./expression

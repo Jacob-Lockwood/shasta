@@ -1,41 +1,59 @@
 ---
-import CodeBlock from "../components/CodeBlock.astro";
 import InlineCode from "../components/InlineCode.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="The Shasta Programming Language">
 	<section class="max-w-xl mx-auto pt-10 flex flex-col gap-2 text-lg">
-		<h1 class="text-4xl font-mono font-bold">Shasta</h1>
+		<h1 class="text-4xl font-mono font-bold">Shasta 🐿</h1>
 		<p class="text-purple-600 dark:text-purple-300">
 			A simple yet powerful programming language for the web
 		</p>
 		<a href="./tutorial/" class="font-mono group">
-			<InlineCode class="underline underline-offset-2" language="shasta">
+			<InlineCode class="underline underline-offset-2">
 				(hyperlink "Get started with the tutorial!")
 			</InlineCode>
 			<span class="inline-block transition-transform group-hover:translate-x-2">
 				&rarr;
 			</span>
 		</a>
+		<a href="./docs/" class="font-mono group">
+			<InlineCode class="underline underline-offset-2">
+				(hyperlink "Jump right into the docs!")
+			</InlineCode>
+			<span class="inline-block transition-transform group-hover:translate-x-2">
+				&rarr;
+			</span>
+		</a>
 		<a href="./playground" class="font-mono group">
-			<InlineCode class="underline underline-offset-2" language="shasta">
+			<InlineCode class="underline underline-offset-2">
 				(hyperlink "Try it online at the playground!")
 			</InlineCode>
 			<span class="inline-block transition-transform group-hover:translate-x-2">
 				&rarr;
 			</span>
 		</a>
-		<a href="./examples" class="font-mono group">
-			<InlineCode class="underline underline-offset-2" language="shasta">
-				(hyperlink "Check out some examples!")
+		<a href="https://github.com/jacobofbrooklyn/shasta" class="font-mono group">
+			<InlineCode class="underline underline-offset-2">
+				(hyperlink "Check it out on GitHub!")
+			</InlineCode>
+			<span class="inline-block transition-transform group-hover:translate-x-2">
+				&rarr;
+			</span>
+		</a>
+		<a
+			href="https://chat.stackexchange.com/rooms/146488/shasta"
+			class="font-mono group"
+		>
+			<InlineCode class="underline underline-offset-2">
+				(hyperlink "Join our chatroom!")
 			</InlineCode>
 			<span class="inline-block transition-transform group-hover:translate-x-2">
 				&rarr;
 			</span>
 		</a>
 	</section>
-	<main class="max-w-2xl mx-auto py-10 flex flex-col gap-5">
+	<main class="max-w-2xl mx-auto py-10 flex flex-col gap-5 text-lg">
 		<p>
 			Shasta is a programming language designed for usage on the web; it
 			transpiles to JavaScript, meaning it can run either in a browser or on a
@@ -50,8 +68,5 @@ import Layout from "../layouts/Layout.astro";
 			I'm working on the documentation that's available on this site, but it's
 			still a work-in-progress.
 		</p>
-		<CodeBlock language="shasta">
-			{`is_prime = {(all(map(range2$){|a|(%$a)}))} ; test if a num is prime`}
-		</CodeBlock>
 	</main>
 </Layout>

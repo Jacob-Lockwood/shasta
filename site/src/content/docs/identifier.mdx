@@ -1,0 +1,36 @@
+---
+title: Identifiers
+---
+
+import CodeBlock from "../../components/CodeBlock.astro";
+import InlineCode from "../../components/InlineCode.astro";
+import Info from "../../components/Info.astro";
+
+A valid identifier in Shasta is a word that matches the RegEx `/[a-zA-Z*+!_%\-/<>]+/`; in other words, it is made up of one or more alphabetical characters or any of `*`, `+`, `!`, `_`, `%`, `-`, `/`, `<`, or `>`.
+
+<Info type="info">
+  Note that numeric characters (digits) are not allowed in identifiers.
+</Info>
+
+The following are all valid identifiers:
+
+<CodeBlock language="shasta">
+  {`
+my_variable
+abc
+*
++-a*%_b/c
+!ad_afda
+AbdasRaO
+`}
+</CodeBlock>
+
+None of the following are identifiers:
+
+<CodeBlock language="shasta">
+  {`
+123
+num1
+🥺🐿
+`}
+</CodeBlock>

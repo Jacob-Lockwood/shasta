@@ -5,8 +5,8 @@ interface Props {
 const { type } = Astro.props;
 
 const style = {
-  info: "bg-fuchsia-200 text-fuchsia-800 dark:bg-indigo-500 dark:text-white",
-  warn: "bg-amber-400 text-amber-900 dark:bg-amber-700 dark:text-white",
+  info: "bg-fuchsia-200 dark:bg-fuchsia-600 dark:border-fuchsia-500 border-fuchsia-300 border-2 !bg-opacity-75 text-fuchsia-900 dark:text-white selection:bg-fuchsia-300",
+  warn: "bg-amber-400 border-amber-500 !bg-opacity-75 border-2 text-amber-900 dark:bg-amber-700 dark:text-white selection:bg-amber-200",
   tip: "bg-blue-200 text-blue-800 dark:bg-blue-500 dark:text-white",
 };
 const icon = {
@@ -17,6 +17,6 @@ const icon = {
 ---
 
 <aside class={`flex items-center shadow gap-5 p-3 rounded ${style[type]}`}>
-  <span class="text-2xl">{icon[type]}</span>
+  <span class="text-2xl select-none">{icon[type]}</span>
   <slot />
 </aside>

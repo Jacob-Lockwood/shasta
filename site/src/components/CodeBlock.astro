@@ -9,13 +9,22 @@ interface Props {
 const { language } = Astro.props;
 const shouldHighlight = language === "shasta";
 const rawHTML = await Astro.slots.render("default");
-const rawCode = unescapeEntities(rawHTML);
+const rawCode = unescapeEntities(rawHTML).trim();
 const code = shouldHighlight ? highlight(rawCode) : rawCode;
 ---
 
 <div
-  class="bg-white dark:bg-slate-900 bg-opacity-75 px-3 py-5 rounded-lg shadow dark:shadow-none"
+  class="bg-white dark:bg-slate-900 bg-opacity-75 p-3 rounded-lg shadow dark:shadow-none CODEBLOCK"
 >
-  <p class="font-mono mb-3 text-sm opacity-75">{language}</p>
+  <div class="flex justify-between text-sm">
+    <span class="font-mono mb-3 opacity-75">{language}</span>
+    {
+      language === "shasta" && (
+        <a href={`/playground/?c=${encodeURIComponent(rawCode)}`}>
+          Try it in the Playground
+        </a>
+      )
+    }
+  </div>
   <pre class="whitespace-pre-wrap"><code set:html={code} /></pre>
 </div>

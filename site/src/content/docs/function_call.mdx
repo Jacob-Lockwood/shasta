@@ -1,0 +1,28 @@
+---
+title: Function Call
+---
+
+import CodeBlock from "../../components/CodeBlock.astro";
+import InlineCode from "../../components/InlineCode.astro";
+
+In Shasta, a [function] is called using Lisp-like syntax:
+
+<CodeBlock language="shasta">
+  {`
+(my_function arg_a arg_b arg_c)
+`}
+</CodeBlock>
+
+Variadic arguments do not exist (yet), so functions that take a variable number of arguments must be passed an [array]:
+
+<CodeBlock language="shasta">
+  {`
+(do_something [1, "a", true])
+`}
+</CodeBlock>
+
+Function application is a kind of [expression].
+
+[function]: ./function
+[array]: ./array
+[expression]: ./expression

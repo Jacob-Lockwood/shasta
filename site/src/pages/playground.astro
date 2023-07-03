@@ -1,12 +1,21 @@
 ---
+import Info from "../components/Info.astro";
 import CodeEditor from "../components/playground/CodeEditor";
 import CompiledView from "../components/playground/CompiledView";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Shasta Playground 🐿">
-  <h1 class="text-4xl font-bold font-mono text-center">Shasta Playground</h1>
-  <main class="grid grid-cols-2 grid-rows-2 gap-10 mx-16 my-10 h-[42rem]">
+  <h1 class="text-4xl font-bold font-mono text-center">Shasta Playground 🐿</h1>
+  <div class="max-w-2xl mx-auto my-10">
+    <Info type="warn">
+      The Shasta playground is in early development; please report any bugs you
+      run into!
+    </Info>
+  </div>
+  <main
+    class="grid md:grid-cols-2 md:grid-rows-2 gap-5 mx-5 lg:gap-10 lg:mx-16 my-10 h-[42rem]"
+  >
     <div class="row-span-2"><CodeEditor client:only /></div>
     <div><CompiledView client:only /></div>
     <div>Result</div>

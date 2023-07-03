@@ -1,0 +1,31 @@
+---
+title: Arrays
+---
+
+import CodeBlock from "../../components/CodeBlock.astro";
+import InlineCode from "../../components/InlineCode.astro";
+
+In Shasta, an array (also known as a list in some other languages) is an ordered collection of values. Each value in an array is called an element. You can create an array by enclosing a comma-separated list of elements in square brackets `[]`. An array is a [literal value].
+
+The following code creates an array that contains the numbers 1, 2, 3, and 4, in order:
+
+<CodeBlock language="shasta">
+  {`
+[1, 2, 3, 4]
+`}
+</CodeBlock>
+
+Array elements don't have to be literals--they can also be other kinds of [expressions]:
+
+<CodeBlock language="shasta">
+  {`
+[
+  "abc",
+  (add 1 2),
+  {|2| (printf "Hello, %s!" [$])},
+]
+`}
+</CodeBlock>
+
+[literal value]: ./literal_value
+[expressions]: ./expressions

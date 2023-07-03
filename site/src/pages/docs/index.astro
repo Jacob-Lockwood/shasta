@@ -1,0 +1,8 @@
+---
+import { getCollection } from "astro:content";
+const [{ slug }] = await getCollection("docs");
+---
+
+<head>
+  <meta http-equiv="refresh" content={`0; url=/docs/${slug}`} />
+</head>

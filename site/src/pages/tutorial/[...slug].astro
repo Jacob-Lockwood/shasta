@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import MarkdownLayout from "../../layouts/MarkdownLayout.astro";
 import type { InferGetStaticPropsType } from "astro";
 import { getCollection } from "astro:content";
 
@@ -15,101 +15,20 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 
-const tutLinks = (await getCollection("tutorial")).sort(
+const links = (await getCollection("tutorial")).sort(
   (a, b) => a.data.index - b.data.index
 );
-const next = tutLinks.find((e) => e.data.index === entry.data.index + 1);
-const prev = tutLinks.find((e) => e.data.index === entry.data.index - 1);
+const next = links.find((e) => e.data.index === entry.data.index + 1);
+const prev = links.find((e) => e.data.index === entry.data.index - 1);
 ---
 
-<Layout title={entry.data.title + " 🐿 Shasta Docs"}>
-  <div
-    class="sm:grid grid-cols-3 grid-rows-2 lg:grid-rows-1 lg:grid-cols-4 gap-10 p-10"
-  >
-    <aside>
-      <h2 class="text-xl font-mono">Tutorial</h2>
-      <nav class="my-5">
-        <ol
-          class="flex flex-col gap-2 list-decimal marker:text-fuchsia-950/50 hover:marker:text-inherit dark:marker:text-fuchsia-200/50"
-          start="0"
-        >
-          {
-            tutLinks.map((entry) => (
-              <li>
-                <a class="block" href={`./${entry.slug}`}>
-                  {entry.data.title}
-                </a>
-              </li>
-            ))
-          }
-        </ol>
-      </nav>
-    </aside>
-    <main class="col-span-2 row-span-2">
-      <div class="CONTENT flex flex-col gap-5">
-        <Content />
-      </div>
-    </main>
-    <aside>
-      <h2 class="text-xl font-mono">On this Page:</h2>
-      <ul class="flex flex-col gap-2 py-5">
-        {
-          headings.map((heading) => (
-            <li>
-              <a
-                class="block before:content-['#'] before:opacity-50 hover:before:opacity-80"
-                href={"#" + heading.slug}
-              >
-                {heading.text}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </aside>
-  </div>
-  <div class="grid grid-cols-2 gap-8 mt-20 max-w-xl mx-auto">
-    {
-      prev ? (
-        <a
-          href={`./${prev.slug}`}
-          class="text-fuchsia-700 dark:text-fuchsia-300 hover:underline block p-5 rounded bg-white dark:bg-fuchsia-800 text-center col-start-1"
-        >
-          <span class="block">Previous:</span> ← {prev.data.title}
-        </a>
-      ) : (
-        <div class="block rounded opacity-60 cursor-not-allowed bg-white dark:bg-fuchsia-800 text-center col-start-1" />
-      )
-    }
-    {
-      next ? (
-        <a
-          href={`./${next.slug}`}
-          class="text-fuchsia-700 dark:text-fuchsia-300 hover:underline block p-5 rounded bg-white dark:bg-fuchsia-800 text-center col-start-2"
-        >
-          <span class="block">Next:</span> {next.data.title} →
-        </a>
-      ) : (
-        <div class="block rounded opacity-50 cursor-not-allowed bg-white dark:bg-fuchsia-800 text-center col-start-2" />
-      )
-    }
-  </div>
-
-  <style is:global>
-    main > .CONTENT h1 {
-      @apply font-mono !font-semibold text-3xl lg:!text-4xl;
-    }
-    main > .CONTENT h2 {
-      @apply font-mono !font-semibold text-2xl lg:!text-3xl;
-    }
-    main > .CONTENT h3 {
-      @apply font-mono !font-semibold text-xl lg:!text-2xl;
-    }
-    main > .CONTENT h4 {
-      @apply font-mono !font-semibold text-lg lg:!text-xl;
-    }
-    main > .CONTENT a {
-      @apply text-fuchsia-700 dark:text-fuchsia-400 hover:underline;
-    }
-  </style>
-</Layout>
+<MarkdownLayout
+  title={entry.data.title + " 🐿 Shasta Tutorial"}
+  links={links}
+  next={next}
+  prev={prev}
+  headings={headings}
+>
+  <span slot="section">Tutorial</span>
+  <Content />
+</MarkdownLayout>

@@ -4,7 +4,7 @@ import { rawCode, setRawCode } from "./code-store";
 import { createSignal } from "solid-js";
 
 const shared =
-  "m-0 p-5 pt-10 text-sm w-full h-full border-none font-mono leading-relaxed absolute top-0 left-0 overflow-y-scroll ";
+  "m-0 p-5 pt-10 text-sm w-full h-full border-none font-mono leading-relaxed absolute top-0 left-0 overflow-scroll whitespace-nowrap ";
 const byteCount = (s: string) => new TextEncoder().encode(s).length;
 function shareLink(code: string) {
   const url = new URL(window.location.href);
@@ -26,12 +26,14 @@ export default function CodeEditor() {
   }
   return (
     <div class="relative h-full">
-      <div class="absolute w-full top-0 left-0 px-5 pt-2 opacity-75 z-20 font-mono text-md flex gap-6 overflow-scroll whitespace-nowrap ">
+      <div class="absolute w-full top-0 left-0 px-5 pt-2 opacity-75 z-20 font-mono text-md flex flex-wrap gap-6">
         <span>shasta</span>
-        <span class="ml-auto">{byteCount(rawCode())} bytes</span>
-        <button onClick={onShare}>
-          {buttonActive() ? "Copied!" : "Copy link"}
-        </button>
+        <div class="ml-auto flex gap-6 flex-wrap">
+          <span>{byteCount(rawCode())} bytes</span>
+          <button onClick={onShare}>
+            {buttonActive() ? "Copied!" : "Copy link"}
+          </button>
+        </div>
       </div>
       <textarea
         value={rawCode()}

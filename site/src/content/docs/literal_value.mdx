@@ -1,0 +1,59 @@
+---
+title: Literal Value
+---
+
+import CodeBlock from "../../components/CodeBlock.astro";
+import InlineCode from "../../components/InlineCode.astro";
+
+In Shasta, a literal value is any of the following:
+
+- a [string] literal
+- a [number] literal
+- a [boolean] literal
+- [null]
+- an [array]
+
+A literal is a subset of an [expression].
+
+## String
+
+<CodeBlock language="shasta">
+  {`
+"Hello, World!"
+'Strings can use "single quotes"'
+"Strings can use 'double quotes'"
+"Strings can have \\"escaped characters\\""
+`}
+</CodeBlock>
+
+## Number
+
+<CodeBlock language="shasta">
+  {`
+1
+2.5
+30000
+0.998
+\_1.2  ; Negative numbers are prefixed with an underscore
+`}
+</CodeBlock>
+
+## Boolean
+
+<CodeBlock language="shasta">
+  {`
+true
+false
+`}
+</CodeBlock>
+
+## Null
+
+<CodeBlock language="shasta">null</CodeBlock>
+
+[string]: #string
+[number]: #number
+[boolean]: #boolean
+[null]: #null
+[array]: ./array
+[expression]: ./expression

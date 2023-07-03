@@ -7,5 +7,15 @@ const tutorial = defineCollection({
     index: z.number(),
   }),
 });
+const docs = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    since: z
+      .string()
+      .regex(/\d+\.\d+\.\d+/)
+      .optional(),
+  }),
+});
 
-export const collections = { tutorial };
+export const collections = { tutorial, docs };

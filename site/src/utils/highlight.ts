@@ -9,7 +9,7 @@ const theme = {
   StringLiteral: "text-green-600 dark:text-green-200",
   NumberLiteral: "text-amber-600 dark:text-amber-300",
   BooleanLiteral: "text-orange-600 italic",
-  Null: "text-purple-600",
+  Null: "text-purple-500",
   Comment: "text-gray-600 dark:text-gray-400 italic",
   Error: "text-inherit underline decoration-wavy decoration-red-500",
   other: "text-inherit",
@@ -26,7 +26,7 @@ export function highlight(source: string) {
     groups: { comments },
     errors,
   } = lexer.tokenize(source);
-  if (errors) console.log("ERRORS", errors);
+  // if (errors) console.log("ERRORS", errors);
   tokens.push(...comments);
   const allTokens: Token[] = [];
   for (let i = 0; i < source.length; i++) {
@@ -41,7 +41,7 @@ export function highlight(source: string) {
       });
     else if (token) allTokens.push(token);
   }
-  console.log(allTokens);
+  // console.log(allTokens);
   let amountAdded = 0;
   let previousTokenType: string = "";
   return allTokens

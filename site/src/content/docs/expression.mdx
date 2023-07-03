@@ -1,0 +1,31 @@
+---
+title: Expression
+---
+
+import CodeBlock from "../../components/CodeBlock.astro";
+import InlineCode from "../../components/InlineCode.astro";
+
+In Shasta, an expression is any of the following:
+
+- A [literal value]
+- A [variable]
+- A [function]
+- A [function call]
+
+The following are all valid expressions:
+
+<CodeBlock language="shasta">
+  {`
+"Hello, world!"
+105
+true
+null
+(+ 1 2)
+{(printf "Hello, %s!" [$])}
+`}
+</CodeBlock>
+
+[literal value]: ./literal_value
+[variable]: ./variable
+[function]: ./function
+[function call]: ./function_call
